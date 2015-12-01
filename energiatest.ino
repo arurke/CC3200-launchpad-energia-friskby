@@ -1,17 +1,10 @@
 #include <WiFi.h>
 #include <Wire.h>
 #include "Adafruit_TMP006.h"
-/*
- * TODO
- * Test other sleep-mechanisms: sleepseconds(), suspend() for power consumption
- * Remove all prints for non-debug if they impact power
- * SSL
- * Timestamp
- */
 
 /**************** Configuration ****************/
 
-// Seconds between postings
+// Seconds between readings/postings
 #define POSTING_INTERVAL_MSEC  20000
 
 // Milliseconds to wait for server-reply. Set to 0 when not debugging.
@@ -46,7 +39,7 @@ struct sensor {
   char* apiKey;
   Reading reading;
   void (*initSensor)();
-  void (*readSensor)();  // Note! readSensor() is responsible of populating valueStr[]
+  void (*readSensor)();  // Note! readSensor() must populate valueStr[]
   char valueStr[MAX_VALUE_STRING_LEN]; // Value as a string (will be used in msg payload)
 };
 
@@ -137,7 +130,7 @@ void readDieTempSensor() {
   // TODO Dig into datasheets, probably need some delay after wake()
   // tmp006.sleep();
 
-  // Create string of the float value (sprintf with float not supported)
+  // Create string of the float value (sprintf with float not supported(and will cause undefined behavior))
   memset(dieTemp.valueStr, 0, MAX_VALUE_STRING_LEN);
   int intPart = (int)dieTemp.reading.asFloat;
   int fractPart = (dieTemp.reading.asFloat * 100) - (intPart * 100);
@@ -173,7 +166,7 @@ void readDustSensor() {
 
   Serial.print("Dust-sensor reading: ");
   Serial.print(dust.valueStr);
-  Serial.println(" mV");
+  Serial.println("");
 }
 
 void postToServer() {
