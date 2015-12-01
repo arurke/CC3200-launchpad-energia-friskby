@@ -1,4 +1,4 @@
-# cc3200-launchpad-energia-friskby
+# FriskBy for CC3200 Launchpad running Energia
 
 A general framework for reading sensors and sending data to the [friskby server](https://github.com/FriskByBergen/friskby), using [Energia](energia.nu) on the [TI CC3200 Launchpad](http://www.ti.com/tool/cc3200-launchxl).
 
@@ -18,7 +18,7 @@ Currently the on-board die-temp sensor and the [Sharp GP2Y1010AU0F](http://www.d
 4. Build and upload (Ctrl+M is handy as it also brings up port monitor) - readings and messages sent to server should appear in port monitor (baud rate 115200)
 
 ### Hardware and connections
-* [TI CC3200 Launchpad](http://www.ti.com/tool/cc3200-launchxl
+* [TI CC3200 Launchpad](http://www.ti.com/tool/cc3200-launchxl)
 * [Sharp GP2Y1010AU0F](http://www.dfrobot.com/index.php?route=product/product&product_id=867)
   * Connect to Dust sensor adapter
 * [Dust sensor adapter](http://www.dfrobot.com/index.php?route=product/product&product_id=1063)
